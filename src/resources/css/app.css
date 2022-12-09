@@ -1,0 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.form-control {
+  @apply inline-block rounded-md shadow-sm bg-white border-gray-300 focus:boder-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50;
+}
