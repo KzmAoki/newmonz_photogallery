@@ -32,17 +32,17 @@
         </select>
     </div>
     <div class="mt-5">
-        <div class="flex">
+        <div class="flex text-white">
             <div class="w-1/6 p-3 bg-blue-600">1</div>
             <div class="w-3/6 p-3 bg-yellow-600">2</div>
             <div class="w-2/6 p-3 bg-green-600">3</div>
         </div>
     </div>
     <div class="mt-5">
-        <div class="grid grid-cols-5">
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
             @foreach (range(1, 10) as $number)
             <div class="p-2">
-                <div class="py-5 text-center cursor-pointer bg-indigo-400 hover:bg-indigo-300">
+                <div class="py-5 text-center text-white cursor-pointer bg-indigo-400 hover:bg-indigo-300">
                     {{ $number }}
                 </div>
             </div>

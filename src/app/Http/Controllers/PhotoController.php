@@ -12,9 +12,13 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $photos = \Auth::user()->photos()->latest()->paginate(10);
+        $data = [
+            'photos' => $photos
+        ];
+        return view('photos.index', $data);
     }
 
     /**
@@ -35,7 +39,21 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'file' => 'required|file|image|mimetypes:image/jpeg,image/png',
+        ]);
+        //ファイル保存
+        $file = $request->file('file');
+        $ext = $file->getClientOriginalExtension();
+        $filename = time() . "." . $ext;
+        $file->storeAs('public/images', $filename);
+
+        //DB保存
+        \Auth::user()->photos()->create([
+            'filename' => $filename,
+        ]);
+
+        return back();
     }
 
     /**
@@ -80,6 +98,8 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        //
+        \Storage::delete('public/images/'. $photo->filename);
+        $photo->delete();
+        return back();
     }
 }

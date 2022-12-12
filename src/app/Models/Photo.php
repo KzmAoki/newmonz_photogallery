@@ -10,9 +10,15 @@ class Photo extends Model
     use HasFactory;
 
     protected $fillable = ['filename'];
+    protected $appends = ['photo_url'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getPhotoUrlAttribute()
+    {
+        return \Storage::url('images/'. $this->filename);
     }
 }
